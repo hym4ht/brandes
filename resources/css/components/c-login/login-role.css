@@ -1,0 +1,108 @@
+/**
+ * ==========================================================================
+ * login-role.css
+ * Deskripsi: Mengelola styling untuk komponen pilihan role (dropdown kustom: Admin, User, Super Admin)
+ *            pada halaman login. Mencakup desain panel opsi, animasi
+ *            slide up, serta state saat opsi dipilih.
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. PEMBUNGKUS UTAMA
+   ========================================================================== */
+
+.select-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
+   2. TRIGER & PANAH 
+   ========================================================================== */
+
+.select-trigger {
+    display: flex;
+    align-items: center;
+    background: var(--C-White-LM);
+}
+
+.select-arrow {
+    position: absolute;
+    right: 16px;
+    color: var(--C-Black-Second);
+    transition: transform 0.3s ease;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+.select-wrapper.active .select-arrow {
+    transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   3. PANEL OPSI
+   ========================================================================== */
+
+.custom-options {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: var(--C-White-LM);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 8px;
+    z-index: 100;
+    padding: 6px;
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    animation: slideUp 0.2s ease-out;
+}
+
+.select-wrapper.active .custom-options {
+    display: flex;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================================================
+   4. ITEM OPSI
+   ========================================================================== */
+
+.custom-option {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: var(--C-Black-Second);
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.custom-option:hover {
+    background: var(--C-Green-Contrast);
+    color: var(--C-Green);
+}
+
+.custom-option.selected {
+    background: var(--C-Green);
+    color: var(--C-White-LM);
+    font-weight: 600;
+}

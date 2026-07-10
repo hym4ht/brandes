@@ -1,0 +1,177 @@
+/**
+ * ==========================================================================
+ * log-berkas.js (User)
+ * Deskripsi: Menangani fungsionalitas pencarian/filtering pada tabel log berkas.
+ * ==========================================================================
+ */
+
+window.filterTable = function () {
+    let input = document.getElementById("searchInput");
+    let filter = input.value.toLowerCase();
+    let table = document.getElementById("logTable");
+    let tbody = table.querySelector("tbody");
+    let tr = tbody.querySelectorAll("tr.data-row");
+
+    let visibleCount = 0;
+
+    // Looping semua baris dan sembunyikan yang tidak sesuai query
+    tr.forEach(row => {
+        // Asumsi data yang dicari ada di Judul atau Tanggal atau Badge
+        let textContent = row.textContent || row.innerText;
+
+        if (textContent.toLowerCase().indexOf(filter) > -1) {
+            row.style.display = "";
+            visibleCount++;
+        } else {
+            row.style.display = "none";
+        }
+    });
+
+    // Perbarui styling untuk baris terakhir
+    updateLastRowStyle(tbody);
+
+    // Tampilkan not-found state jika tidak ada yang cocok
+    let emptyState = document.getElementById("emptyState");
+    let searchNotFoundState = document.getElementById("searchNotFoundState");
+
+    // Gunakan jumlah baris (tr.length) untuk menentukan kekosongan tabel, lebih stabil
+    let totalCount = tr.length;
+
+    if (totalCount === 0) {
+        if (emptyState) emptyState.style.display = "";
+        if (searchNotFoundState) searchNotFoundState.style.display = "none";
+    } else {
+        if (emptyState) emptyState.style.display = "none";
+
+        if (visibleCount === 0 && filter !== "") {
+            if (searchNotFoundState) searchNotFoundState.style.display = "";
+        } else {
+            if (searchNotFoundState) searchNotFoundState.style.display = "none";
+        }
+    }
+};
+
+// Fungsi helper untuk menghapus border-bottom pada baris terakhir yang visible
+function updateLastRowStyle(tbody) {
+    let trs = Array.from(tbody.querySelectorAll("tr.data-row"));
+
+    // Reset semua class last-row
+    trs.forEach(row => row.classList.remove("last-row"));
+
+    // Cari row terakhir yang tidak disembunyikan
+    let visibleRows = trs.filter(row => row.style.display !== "none");
+
+    if (visibleRows.length > 0) {
+        visibleRows[visibleRows.length - 1].classList.add("last-row");
+    }
+}
+
+/**
+ * ==========================================================================
+ * REALTIME POLLING & AJAX SUBMIT
+ * ==========================================================================
+ */
+
+window.fetchLogData = function() {
+    // Jangan lakukan polling jika ada modal yang sedang terbuka
+    if (document.querySelector('.modal-overlay.show')) {
+        return; 
+    }
+    
+    // Jangan lakukan polling jika Tour Guide sedang berjalan (mencegah kedipan dan reset DOM)
+    if (document.querySelector('.tour-backdrop') && document.querySelector('.tour-backdrop').style.display === 'block') {
+        return;
+    }
+    
+    fetch(window.location.href, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.text())
+    .then(html => {
+        // CEK SEKALI LAGI SEBELUM UPDATE DOM (Mencegah Race Condition dengan Tour Guide)
+        if (document.querySelector('.tour-backdrop') && document.querySelector('.tour-backdrop').style.display === 'block') {
+            return;
+        }
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Update tabel (hanya jika ada perubahan)
+        const currentTbody = document.querySelector('#logTable tbody');
+        const newTbody = doc.querySelector('#logTable tbody');
+        if (currentTbody && newTbody) {
+            if (currentTbody.innerHTML !== newTbody.innerHTML) {
+                currentTbody.innerHTML = newTbody.innerHTML;
+            }
+        }
+        
+        // Update angka statistik satu per satu agar tidak memicu ulang animasi CSS
+        ['totalBerkasCount', 'totalKkCount', 'totalKtpCount', 'totalAkteCount'].forEach(id => {
+            let curr = document.getElementById(id);
+            let newVal = doc.getElementById(id);
+            if(curr && newVal && curr.innerHTML !== newVal.innerHTML) {
+                curr.innerHTML = newVal.innerHTML;
+            }
+        });
+        
+        // Aplikasikan kembali filter pencarian jika ada input
+        if (typeof window.filterTable === 'function') {
+            window.filterTable();
+        }
+    })
+    .catch(error => {
+        console.error("Polling error:", error);
+    });
+};
+
+// Interval polling setiap 3 detik
+setInterval(window.fetchLogData, 3000);
+
+// Intercept form submission (Ambil/Kembalikan Dokumen) agar tidak me-refresh halaman
+document.addEventListener('submit', function(e) {
+    if (e.target && e.target.tagName === 'FORM' && e.target.action && e.target.action.includes('ambil')) {
+        e.preventDefault();
+        
+        let form = e.target;
+        let submitBtn = form.querySelector('button[type="submit"]');
+        let span = submitBtn ? submitBtn.querySelector('span') : null;
+        let originalText = span ? span.innerText : '';
+        
+        // Optimistic UI Update: Langsung ubah teks dan warna tanpa loading "Memproses..."
+        if(submitBtn && span) {
+            if(originalText.includes('Ambil ')) {
+                // Berubah dari "Ambil X" menjadi "X Sudah Diambil"
+                let docType = originalText.replace('Ambil ', '');
+                span.innerText = docType + ' Sudah Diambil';
+                submitBtn.style.color = 'var(--C-Red)';
+            } else if(originalText.includes(' Sudah Diambil')) {
+                // Berubah dari "X Sudah Diambil" menjadi "Ambil X"
+                let docType = originalText.replace(' Sudah Diambil', '');
+                span.innerText = 'Ambil ' + docType;
+                submitBtn.style.color = 'var(--C-Black)';
+            }
+        }
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            // Setelah berhasil, langsung trigger pengambilan data terbaru untuk update badge dsb.
+            window.fetchLogData();
+        })
+        .catch(err => {
+            console.error('Error submitting form:', err);
+            // Revert state jika gagal
+            if(submitBtn && span) {
+                span.innerText = originalText;
+                submitBtn.style.color = originalText.includes('Sudah Diambil') ? 'var(--C-Red)' : 'var(--C-Black)';
+            }
+        });
+    }
+});

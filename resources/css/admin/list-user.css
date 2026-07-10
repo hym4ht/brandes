@@ -1,0 +1,440 @@
+/**
+ * ==========================================================================
+ * list-user.css
+ * Deskripsi: Mengelola seluruh styling untuk halaman Daftar User, 
+ *            termasuk kartu statistik jumlah user, fitur pencarian,
+ *            tabel data dengan sidik jari, dan penyesuaian tema gelap.
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. RINGKASAN STATISTIK (STAT CARDS)
+   ========================================================================== */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: var(--C-White-LM);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeUp 0.4s ease both;
+}
+
+/* Animasi bertahap untuk kartu statistik */
+.stat-card:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.stat-card:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stat-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--C-Black);
+}
+
+.stat-value {
+    font-size: 38px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    color: var(--C-Black);
+    line-height: 1;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--C-Green-Contrast);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--C-Green);
+}
+
+
+/* ==========================================================================
+   2. TOOLBAR (SEARCH & ACTION)
+   ========================================================================== */
+
+.div-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Kotak Pencarian */
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 8px;
+    padding: 0 16px;
+    transition: all 0.2s;
+    background: var(--C-White-LM);
+    width: 584px;
+    height: 48px;
+    /* Tinggi seragam */
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.search-box:focus-within {
+    border-color: var(--C-Green);
+    box-shadow: 0 0 0 4px var(--C-Green-Contrast-DM);
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--C-Black-Second);
+    width: 100%;
+    background: transparent;
+}
+
+.search-box svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    stroke: var(--C-Black);
+}
+
+/* Tombol Tambah User */
+.btn-tambah {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--C-Green);
+    color: var(--C-White-LM);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-tambah:hover {
+    background: var(--C-Green-Hover);
+}
+
+.btn-tambah svg {
+    width: 22px !important;
+    height: 22px !important;
+    stroke: var(--C-White-LM);
+}
+
+
+/* ==========================================================================
+   3. TABEL DATA USER
+   ========================================================================== */
+
+.table-card {
+    background: var(--C-White-LM);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 12px;
+    animation: fadeUp 0.4s ease 0.1s both;
+    position: relative;
+    overflow: hidden;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+thead {
+    background: var(--C-White-Second);
+}
+
+th {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--C-Black-Second);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1.5px solid var(--C-Stroke);
+    padding: 18px 20px;
+}
+
+td {
+    text-align: left;
+    color: var(--C-Black);
+    border-bottom: 1.5px solid var(--C-Stroke);
+    padding: 20px 22px;
+    vertical-align: middle;
+}
+
+tr:last-child td,
+tr.last-row td,
+#emptyState td,
+#searchNotFoundState td {
+    border-bottom: none !important;
+}
+
+/* Pengaturan Lebar Kolom */
+th:nth-child(1) {
+    width: 68px;
+    padding-left: 24px;
+}
+
+/* NO */
+th:nth-child(2) {
+    width: 200px;
+}
+
+/* NAMA */
+th:nth-child(3) {
+    width: 240px;
+}
+
+/* FINGERPRINTS */
+th:nth-child(4) {
+    width: 140px;
+}
+
+/* PIN */
+th:nth-child(5) {
+    width: 130px;
+}
+
+/* ROLE */
+th:nth-child(6) {
+    width: 130px;
+}
+
+/* STATUS */
+th:nth-child(7) {
+    width: 100px;
+    padding-right: 24px;
+}
+
+/* AKSI */
+
+
+/* ==========================================================================
+   4. KOMPONEN INTERNAL TABEL (BADGES & ICONS)
+   ========================================================================== */
+
+.td-fp,
+.td-pin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.td-fp svg {
+    width: 19px;
+    height: 19px;
+    stroke: var(--C-Green);
+    flex-shrink: 0;
+}
+
+.td-pin svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Badge Status Aktif/Nonaktif */
+.badge-status {
+    display: inline-flex;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.badge-status.aktif {
+    background: var(--C-Green-Contrast);
+    color: var(--C-Green);
+}
+
+.badge-status.nonaktif {
+    background: var(--C-Red-Contrast);
+    color: var(--C-Red);
+}
+
+
+
+/* ==========================================================================
+   6. MEDIA QUERIES (RESPONSIVE)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .stat-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-value {
+        font-size: 32px;
+    }
+
+    .div-toolbar {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+
+    .search-box {
+        flex: 1 !important;
+        width: auto !important;
+        min-width: 0;
+        height: 48px;
+    }
+
+    .toolbar-actions {
+        flex-shrink: 0;
+    }
+
+    .btn-tambah {
+        padding: 12px 14px !important;
+        justify-content: center;
+        height: 48px;
+    }
+
+    /* Tabel & Konten Card */
+    .table-card {
+        border-radius: 8px;
+        margin: 0 -4px;
+        border: 1.5px solid var(--C-Stroke);
+    }
+
+    th {
+        padding: 14px 16px;
+        font-size: 14px;
+    }
+
+    td {
+        padding: 16px;
+        font-size: 14px;
+    }
+
+    .td-fp,
+    .td-pin {
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .td-fp svg,
+    .td-pin svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .table-card {
+        border-radius: 8px;
+        margin: 0;
+        border: 1.5px solid var(--C-Stroke);
+    }
+
+    th,
+    td {
+        padding: 12px 16px;
+    }
+}
+
+
+/* ==========================================================================
+   7. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .stat-card,
+body.dark-mode .table-card {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .stat-label,
+body.dark-mode .stat-value,
+body.dark-mode td {
+    color: var(--C-White-LM) !important;
+}
+
+body.dark-mode th {
+    color: var(--C-Seccond-Text-DM) !important;
+}
+
+body.dark-mode .stat-icon {
+    background: var(--C-Green-Contrast-DM);
+}
+
+body.dark-mode thead {
+    background: var(--C-Black-Seccond-3-DM);
+}
+
+body.dark-mode td,
+body.dark-mode th {
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .search-box {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .search-box input,
+body.dark-mode .search-box input::placeholder {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .search-box svg {
+    color: var(--C-White-LM);
+    stroke: var(--C-White-LM);
+}
+
+body.dark-mode .badge-status.aktif {
+    background: var(--C-Green-Contrast-DM);
+    color: var(--C-Green);
+}
+
+body.dark-mode .badge-status.nonaktif {
+    background: var(--C-Red-Contrast-DM);
+    color: var(--C-Red-Soft);
+}

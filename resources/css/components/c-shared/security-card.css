@@ -1,0 +1,344 @@
+/**
+ * ==========================================================================
+ * security-card.css
+ * Deskripsi: Mengelola seluruh styling untuk komponen Kartu Notifikasi
+ *            Keamanan (Shared). Mencakup penanganan kategori notifikasi
+ *            (Kritis, Peringatan, Akses), desain metadata, serta
+ *            penyesuaian untuk tema gelap dan perangkat mobile.
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. DASAR KARTU (CARD BASE)
+   ========================================================================== */
+
+.notif-item {
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background: var(--C-White-LM);
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.notif-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ==========================================================================
+   2. KOTAK IKON & WARNA KATEGORI (ICON BOX & COLORS)
+   ========================================================================== */
+
+.notif-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.notif-icon-box svg {
+    width: 24px !important;
+    height: 24px !important;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Kategori: Merah (Kritis) */
+.notif-item.red {
+    border-color: var(--C-Red-Stroke);
+    background: var(--C-Red-Contrast);
+}
+
+.notif-item.red .notif-icon-box {
+    background: var(--C-Red-Contrast-Notif);
+}
+
+.notif-item.red .notif-icon-box svg {
+    stroke: var(--C-Red);
+}
+
+/* Kategori: Kuning (Peringatan) */
+.notif-item.yellow {
+    border-color: var(--C-Yellow-Stroke);
+    background: var(--C-Yellow-Contrast);
+}
+
+.notif-item.yellow .notif-icon-box {
+    background: var(--C-Yellow-Stroke);
+}
+
+.notif-item.yellow .notif-icon-box svg {
+    stroke: var(--C-Yellow);
+}
+
+/* Kategori: Hijau (Akses Berhasil) */
+.notif-item.green {
+    border-color: var(--C-Green-Stroke);
+    background: var(--C-Green-Contrast);
+}
+
+.notif-item.green .notif-icon-box {
+    background: var(--C-Green-Contrast-Notif);
+}
+
+.notif-item.green .notif-icon-box svg {
+    stroke: var(--C-Green);
+}
+
+
+/* ==========================================================================
+   3. HEADER KONTEN (TITLE & TAG)
+   ========================================================================== */
+
+.notif-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.notif-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.notif-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
+}
+
+.notif-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--C-Black);
+    letter-spacing: -0.01em;
+}
+
+.notif-tag {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.notif-tag.kritis {
+    background: var(--C-Red);
+    color: var(--C-White-LM);
+}
+
+.notif-tag.peringatan {
+    background: var(--C-Yellow);
+    color: var(--C-White-LM);
+}
+
+.notif-tag.akses {
+    background: var(--C-Green);
+    color: var(--C-White-LM);
+}
+
+
+/* ==========================================================================
+   4. DESKRIPSI & METADATA
+   ========================================================================== */
+
+.notif-desc {
+    font-size: 14px;
+    color: var(--C-Black-Second);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.notif-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--C-Black-Second);
+    font-weight: 500;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.notif-meta .meta-dot {
+    color: var(--C-Black);
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+
+/* ==========================================================================
+   5. FOOTER & TIMESTAMP
+   ========================================================================== */
+
+.notif-footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.notif-divider {
+    border: none;
+    border-top: 1.5px solid var(--C-Stroke);
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.notif-time {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 15px;
+    color: var(--C-Black-Second);
+    font-weight: 400;
+}
+
+.time-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notif-time svg:not(.meta-dot) {
+    width: 20px;
+    height: 20px;
+    stroke: var(--C-Black);
+    flex-shrink: 0;
+}
+
+
+/* ==========================================================================
+   6. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .notif-item {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .notif-item.red {
+    background: var(--C-Red-Contrast-DM);
+    border-color: var(--C-Red-Stroke-DM);
+}
+
+body.dark-mode .notif-item.red .notif-icon-box {
+    background: var(--C-Red-Stroke-DM);
+}
+
+body.dark-mode .notif-item.yellow {
+    background: var(--C-Yellow-Contrast-DM);
+    border-color: var(--C-Yellow-Stroke-DM);
+}
+
+body.dark-mode .notif-item.yellow .notif-icon-box {
+    background: var(--C-Yellow-Stroke-DM);
+}
+
+body.dark-mode .notif-item.green {
+    background: var(--C-Green-Contrast-DM);
+    border-color: var(--C-Green-Stroke-DM);
+}
+
+body.dark-mode .notif-item.green .notif-icon-box {
+    background: var(--C-Green-Stroke-DM);
+}
+
+body.dark-mode .notif-title {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .notif-desc {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .notif-meta {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .notif-meta .meta-dot {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .notif-divider {
+    border-top-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .notif-time,
+body.dark-mode .notif-time svg {
+    color: var(--C-Seccond-Text-DM);
+    stroke: var(--C-Seccond-Text-DM);
+}
+
+
+/* ==========================================================================
+   7. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .notif-item {
+        width: 100%;
+        padding: 18px;
+    }
+
+    .notif-header {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .notif-tag {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .notif-item {
+        gap: 12px;
+    }
+
+    .notif-icon-box {
+        width: 40px;
+        height: 40px;
+    }
+
+    .notif-icon-box svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .notif-title {
+        font-size: 15px;
+    }
+
+    .notif-desc {
+        font-size: 14px;
+    }
+
+    .notif-meta {
+        font-size: 13px;
+        gap: 8px;
+    }
+}

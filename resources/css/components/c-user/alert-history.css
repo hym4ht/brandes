@@ -1,0 +1,214 @@
+/**
+ * ==========================================================================
+ * alert-history.css
+ * Deskripsi: Mengelola styling untuk banner notifikasi riwayat (History Alert).
+ *            Mencakup desain kartu premium, badge informasi, tombol tutup 
+ *            melayang, serta animasi transisi dan tema gelap.
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. DASAR ALERT (ALERT CONTAINER)
+   ========================================================================== */
+
+.alert-history {
+    position: relative;
+    background: var(--C-White-LM);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: slideInDown 0.4s ease-out;
+}
+
+.alert-body-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+/* ==========================================================================
+   2. KONTEN KIRI (TITLE & SUBTITLE)
+   ========================================================================== */
+
+.alert-content-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.alert-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--C-Black);
+    margin: 0;
+}
+
+.alert-subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--C-Black-Second);
+    margin: 0;
+    line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   3. KONTEN KANAN (BADGE TAG)
+   ========================================================================== */
+
+.alert-content-right {
+    flex-shrink: 0;
+}
+
+.alert-badge-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--C-White-Second);
+    padding: 8px 12px;
+    margin-right: 12px;
+    border-radius: 99px;
+}
+
+.badge-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--C-Black-Second);
+}
+
+.badge-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--C-Black-Second);
+}
+
+
+/* ==========================================================================
+   4. TOMBOL TUTUP (DISMISS BUTTON)
+   ========================================================================== */
+
+.alert-dismiss-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 38px;
+    height: 38px;
+    background: var(--C-White-Second);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease !important;
+    z-index: 10;
+}
+
+.alert-dismiss-btn:hover {
+    background: var(--C-Stroke);
+}
+
+.alert-dismiss-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--C-Black);
+    stroke-width: 2.5;
+}
+
+
+/* ==========================================================================
+   5. ANIMASI (SLIDE IN)
+   ========================================================================== */
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================================================
+   6. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .alert-history {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .alert-title {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .alert-subtitle {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .alert-badge-tag {
+    background: var(--C-Stroke-DM);
+    border-color: var(--C-Black-Seccond-3-DM);
+}
+
+body.dark-mode .badge-text,
+body.dark-mode .badge-icon {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .alert-dismiss-btn {
+    background: var(--C-Black-Seccond-2-DM);
+    border: 1.5px solid var(--C-Stroke-DM);
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .alert-dismiss-btn:hover {
+    background: var(--C-Stroke-DM);
+}
+
+body.dark-mode .alert-dismiss-btn svg {
+    color: var(--C-White-LM);
+}
+
+
+/* ==========================================================================
+   7. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .alert-history {
+        padding: 20px;
+    }
+
+    .alert-body-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .alert-content-right {
+        width: 100%;
+    }
+
+    .alert-badge-tag {
+        width: fit-content;
+        padding: 6px 12px;
+    }
+
+    .alert-title {
+        font-size: 14.5px;
+    }
+
+    .alert-subtitle {
+        font-size: 13px;
+    }
+}

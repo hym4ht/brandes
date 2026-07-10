@@ -1,0 +1,196 @@
+/**
+ * ==========================================================================
+ * history-card.css
+ * Deskripsi: Mengelola styling untuk komponen History Card (Shared).
+ *            Digunakan untuk menampilkan log aktivitas brankas di dashboard.
+ *            Mencakup desain kartu, status ikon (success/danger), serta
+ *            tampilan state kosong jika tidak ada data.
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. KONTAINER UTAMA (HISTORY CARD)
+   ========================================================================== */
+
+.history-card {
+    margin: 16px 22px;
+    background: var(--C-White-1-Second);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 12px;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    overflow: hidden;
+    animation: historySlideIn 0.4s ease backwards;
+}
+
+.history-card:last-child {
+    margin-bottom: 24px;
+}
+
+
+/* ==========================================================================
+   2. BAGIAN ATAS (USER & ICON)
+   ========================================================================== */
+
+.history-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.history-card-user {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.history-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Status: Berhasil/Aman */
+.history-card-icon.success {
+    background: var(--C-Green-Contrast);
+    color: var(--C-Green);
+}
+
+/* Status: Gagal/Bahaya */
+.history-card-icon.danger {
+    background: var(--C-Red-Contrast);
+    color: var(--C-Red);
+}
+
+.history-card-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+/* ==========================================================================
+   3. DETAIL INFO (NAME & ACTION)
+   ========================================================================== */
+
+.history-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.history-card-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--C-Black);
+    line-height: 1.4;
+}
+
+.history-card-action {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--C-Black-Second);
+}
+
+/* Badge role (misal: Admin/User) */
+.history-card-badge {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: var(--C-Black-Seccond-3-DM);
+    color: var(--C-Black-Second);
+    letter-spacing: 0.3px;
+    font-family: 'Inter', sans-serif;
+}
+
+
+/* ==========================================================================
+   4. BAGIAN BAWAH (FOOTER & TIMESTAMP)
+   ========================================================================== */
+
+.history-card-divider {
+    border-top: 1px solid var(--C-Stroke);
+    width: 100%;
+}
+
+.history-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--C-Black-Second);
+}
+
+.history-card-footer svg {
+    width: 22px;
+    height: 22px;
+    color: var(--C-Black-Second);
+}
+
+
+/* ==========================================================================
+   5. STATE KOSONG (EMPTY STATE)
+   ========================================================================== */
+
+.history-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    gap: 12px;
+    text-align: center;
+    animation: historySlideIn 0.3s ease;
+}
+
+.history-empty-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--C-White-Second);
+    border: 1.5px solid var(--C-Stroke);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--C-Black-Second);
+    margin-bottom: 4px;
+}
+
+.history-empty-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--C-Black);
+    margin: 0;
+}
+
+.history-empty-desc {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--C-Black-Second);
+    margin: 0;
+    line-height: 1.6;
+}
+
+
+/* ==========================================================================
+   6. ANIMASI (SLIDE IN)
+   ========================================================================== */
+
+@keyframes historySlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

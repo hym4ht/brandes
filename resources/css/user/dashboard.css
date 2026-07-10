@@ -1,0 +1,419 @@
+/**
+ * ==========================================================================
+ * dashboard.css
+ * Deskripsi: Mengelola styling untuk halaman Dashboard User.
+ *            Mencakup kartu statistik, baris keamanan/kredensial,
+ *            tabel riwayat akses, serta sistem tema gelap dan responsif.
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. PEMBUNGKUS DASHBOARD (WRAPPER & ANIMATIONS)
+   ========================================================================== */
+
+.dashboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes livePulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+
+/* ==========================================================================
+   2. KARTU STATISTIK (STAT CARDS)
+   ========================================================================== */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: var(--C-White-LM);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.4s ease both;
+}
+
+.stat-card:nth-child(2) { animation-delay: 0.1s; }
+
+.stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.stat-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--C-Black);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--C-Green-Contrast);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--C-Green);
+}
+
+.stat-icon svg { width: 28px; height: 28px; }
+
+.stat-value {
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--C-Black);
+    margin-top: 12px;
+    margin-bottom: 4px;
+    line-height: 1.1;
+}
+
+.stat-divider {
+    border: none;
+    border-top: 1.5px solid var(--C-Stroke);
+    margin: 22px 0 18px;
+}
+
+.stat-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.footer-text {
+    font-size: 16px;
+    font-weight: 400 !important;
+    color: var(--C-Black-Second);
+}
+
+.stat-trend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.stat-trend.up { color: var(--C-Green); }
+.stat-trend.down { color: var(--C-Red); }
+.stat-trend svg { width: 20px; height: 20px; }
+
+
+/* ==========================================================================
+   3. BARIS KEAMANAN & KREDENSIAL (SECURITY ROW)
+   ========================================================================== */
+
+.security-row {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 18px;
+    align-items: stretch;
+    width: 100%;
+}
+
+/* Info Kredensial Box */
+.cred-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cred-info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cred-label { font-size: 16px; font-weight: 700; color: var(--C-Black); }
+.cred-sublabel { font-size: 13px; color: var(--C-Black-Second); }
+
+.cred-icon-box {
+    width: 44px;
+    height: 44px;
+    background: var(--C-Green-Contrast);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cred-body { padding: 24px 0; }
+.status-terdaftar { font-size: 38px; font-weight: 800; color: var(--C-Green); letter-spacing: 0.5px; }
+
+.cred-footer { display: flex; flex-direction: column; gap: 16px; }
+.cred-footer .divider { height: 1px; background: var(--C-Stroke); }
+.footer-msg { font-size: 14px; color: var(--C-Black-Second); }
+
+
+/* ==========================================================================
+   5. TABEL RIWAYAT (HISTORY TABLE CARD)
+   ========================================================================== */
+
+.history-table-card {
+    background: var(--C-White-LM);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-card-header {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid var(--C-Stroke);
+    transition: background 0.15s;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.table-card-header:hover { background: var(--C-White-Second); }
+.table-card-header h3 { font-size: 16px; font-weight: 600; color: var(--C-Black); }
+.table-card-header svg { width: 24px; height: 24px; color: var(--C-Black-Second); transition: all 0.2s; }
+.table-card-header:hover svg { color: var(--C-Green); transform: translateX(3px); }
+
+
+/* ==========================================================================
+   6. STRUKTUR TABEL (THEAD, TBODY, CELLS)
+   ========================================================================== */
+
+.table-responsive { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+thead { background: var(--C-White-Second); }
+
+th, .th {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--C-Black-Second);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1.5px solid var(--C-Stroke);
+    vertical-align: middle;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+td {
+    text-align: left;
+    color: var(--C-Black);
+    border-bottom: 1.5px solid var(--C-Stroke);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+tr:last-child td { border-bottom: none; }
+
+/* Konfigurasi Kolom Individual */
+thead th:nth-child(1) { width: 58px; padding: 16px 20px; }
+tbody td:nth-child(1) { padding: 16px 20px; font-weight: 500; font-size: 16px; }
+
+thead th:nth-child(2) { width: 174px; padding: 16px 20px; }
+tbody td:nth-child(2) { padding: 16px 22px; font-weight: 600; font-size: 16px; }
+
+thead th:nth-child(3) { width: 190px; padding: 16px 20px; }
+tbody td:nth-child(3) { padding: 28px 22px; font-weight: 600; font-size: 16px; }
+
+thead th:nth-child(4) { width: 220px; padding: 14px 20px; }
+tbody td:nth-child(4) { padding: 14px 22px; font-size: 16px; white-space: normal; }
+.time-main { font-weight: 600; margin-bottom: 6px; }
+.time-sub { color: var(--C-Black-Second); font-size: 15px; }
+
+thead th:nth-child(5) { width: 148px; padding: 16px 20px; }
+tbody td:nth-child(5) { padding: 16px 22px; font-weight: 600; font-size: 16px; }
+
+thead th:nth-child(6) { width: 120px; padding: 16px 20px; }
+tbody td:nth-child(6) { padding: 16px 22px; font-weight: 500; font-size: 16px; }
+
+
+/* ==========================================================================
+   7. STATE KOSONG (EMPTY STATE)
+   ========================================================================== */
+
+#historyEmpty td, #historySearchEmpty td {
+    padding: 0 !important;
+    border-bottom: none !important;
+    background: transparent !important;
+}
+
+.empty-state-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 32px;
+    text-align: center;
+    width: 100%;
+}
+
+.empty-state-icon { display: flex; align-items: center; justify-content: center; animation: fadeIn 0.5s ease-out; }
+.empty-state-icon svg { width: 74px; height: 74px; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.02)); }
+
+.empty-state-text { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.empty-state-title { font-size: 16px; font-weight: 600; color: var(--C-Black); margin: 0; }
+.empty-state-desc { font-size: 16px; font-weight: 400 !important; color: var(--C-Black-Second); margin: 0; line-height: 1.5; }
+
+/* Ikon Ganda (Light/Dark) */
+.icon-dark { display: none !important; }
+body.dark-mode .icon-light { display: none !important; }
+body.dark-mode .icon-dark { display: block !important; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ==========================================================================
+   8. ELEMEN KECIL (BADGES, DOTS, TIME)
+   ========================================================================== */
+
+.span-meta-dot {
+    display: inline-block !important;
+    width: 6px !important;
+    height: 6px !important;
+    background: var(--C-Stroke) !important;
+    border-radius: 50% !important;
+    margin: 0 10px !important;
+    vertical-align: middle !important;
+}
+
+.time-main { font-size: 16px; font-weight: 600; color: var(--C-Black); }
+.time-sub { font-size: 15px; color: var(--C-Black-Second); }
+
+.badge { display: inline-flex; padding: 6px 14px; border-radius: 99px; font-size: 16px; font-weight: 500; }
+.badge-success { background: var(--C-Green-Contrast); color: var(--C-Green); }
+.badge-danger { background: var(--C-Red-Contrast); color: var(--C-Red); }
+
+
+/* ==========================================================================
+   9. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .status-meta-row { flex-wrap: wrap; gap: 12px; }
+    .meta-item { font-size: 15px !important; }
+}
+
+@media (max-width: 768px) {
+    .dashboard-wrapper { gap: 22px; } /* Disamakan 22px */
+    .stat-grid, .security-row { grid-template-columns: 1fr; gap: 22px; } /* Disamakan 22px */
+    
+    .stat-card { padding: 18px; }
+    .stat-value { font-size: 32px; }
+    .footer-text { font-size: 14px !important; }
+
+    .cred-body { padding: 16px 0; }
+    .status-terdaftar { font-size: 28px; }
+
+    /* Tabel & Konten Card */
+    .history-table-card { 
+        border-radius: 8px; 
+        margin: 0 -4px; 
+        border: 1.5px solid var(--C-Stroke);
+    }
+    
+    .table-card-header { padding: 14px 16px; }
+    .table-card-header h3 { font-size: 15px; }
+
+    table { min-width: 600px; table-layout: auto; }
+    th, td { padding: 12px 14px; font-size: 13px !important; }
+    
+    .time-main { font-size: 14px; }
+    .time-sub { font-size: 12px; }
+    .badge { padding: 4px 10px; font-size: 13px; }
+
+    .empty-state-container { padding: 32px 16px; gap: 12px; }
+    .empty-state-icon svg { width: 50px; height: 50px; }
+    .empty-state-title { font-size: 15px; }
+    .empty-state-desc { font-size: 13px !important; max-width: 260px; }
+}
+
+@media (max-width: 480px) {
+    .history-table-card {
+        border-radius: 8px;
+        margin: 0;
+        border: 1.5px solid var(--C-Stroke);
+    }
+
+    th, td {
+        padding: 12px 16px;
+    }
+}
+
+
+/* ==========================================================================
+   10. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .stat-card,
+body.dark-mode .security-index-card,
+body.dark-mode .cred-status-card,
+body.dark-mode .history-table-card {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .history-header-group,
+body.dark-mode .history-search {
+    background: var(--C-Black-Seccond-1-DM);
+}
+
+body.dark-mode .table-card-header:hover { background: var(--C-Black-Seccond-2-DM); }
+body.dark-mode .time-main { color: var(--C-White-LM); }
+body.dark-mode .time-sub { color: var(--C-Seccond-Text-DM) !important; }
+
+body.dark-mode .stat-label,
+body.dark-mode .stat-value,
+body.dark-mode .cred-label,
+body.dark-mode .status-terdaftar,
+body.dark-mode .history-table-card h3,
+body.dark-mode td {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .span-meta-dot { background: var(--C-White-LM); }
+body.dark-mode .stat-icon { background: var(--C-Green-Contrast-DM); }
+body.dark-mode thead { background: var(--C-Black-Seccond-3-DM); }
+body.dark-mode .badge-success { background: var(--C-Green-Contrast-DM); color: var(--C-Green); }
+body.dark-mode .badge-danger { background: var(--C-Red-Contrast-DM); color: var(--C-Red); }
+
+body.dark-mode .cred-footer .divider {
+    background: var(--C-Stroke-DM);
+}
+
+body.dark-mode td,
+body.dark-mode th,
+body.dark-mode .stat-divider,
+body.dark-mode .table-card-header {
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .footer-text, body.dark-mode .empty-state-desc { color: var(--C-Seccond-Text-DM); }
+body.dark-mode .empty-state-title { color: var(--C-White-LM); }
+
+/* SVG Dark Mode Adjustment */
+body.dark-mode .empty-state-icon svg rect:first-child { fill: var(--C-Black-Seccond-2-DM); }
+body.dark-mode .empty-state-icon svg path[fill="#E4E7EC"],
+body.dark-mode .empty-state-icon svg rect[fill="#E4E7EC"] { fill: var(--C-Black-Seccond-3-DM); }
+body.dark-mode .empty-state-icon svg circle[fill="white"] { fill: var(--C-Black-Seccond-1-DM); }body.dark-mode .empty-state-icon svg circle[stroke="#D0D5DD"] { stroke: var(--C-Stroke-DM); }

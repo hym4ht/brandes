@@ -1,0 +1,393 @@
+/**
+ * ==========================================================================
+ * user-edit.css
+ * Deskripsi: Mengelola seluruh styling untuk komponen Modal Edit User.
+ *            Mencakup desain overlay, form input dengan ikon, penanganan
+ *            input angka (PIN), serta penyesuaian tema gelap.
+ * ==========================================================================
+ */
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   1. DASAR MODAL (OVERLAY & CONTAINER)
+   ========================================================================== */
+
+.user-edit-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--C-Overlay-Dark);
+    z-index: 99999999;
+    padding: 20px;
+    overflow-y: auto;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.user-edit-overlay.show {
+    display: flex !important;
+}
+
+.modal.modal-edit {
+    background: var(--C-White-LM);
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 534px;
+    height: auto;
+    animation: fadeUp 0.3s ease-out;
+    position: relative;
+    margin: auto;
+}
+
+
+/* ==========================================================================
+   2. HEADER MODAL
+   ========================================================================== */
+
+.modal-edit .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.modal-edit .modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--C-Black);
+    line-height: 20px;
+    letter-spacing: -0.5px;
+}
+
+.modal-edit .modal-close {
+    background: var(--C-White-Second);
+    border: none;
+    cursor: pointer;
+    color: var(--C-Black);
+    width: 38px;
+    height: 38px;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: none !important;
+}
+
+.modal-edit .modal-close:hover {
+    transform: none !important;
+}
+
+.modal-close svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+}
+
+
+/* ==========================================================================
+   3. LAYOUT FORM & GRUP INPUT
+   ========================================================================== */
+
+.modal-edit .form-inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.modal-edit .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-edit .form-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--C-Black);
+    margin: 0;
+}
+
+
+/* ==========================================================================
+   4. KONTROL INPUT (FIELD & ICON)
+   ========================================================================== */
+
+.modal-edit .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.modal-edit .input-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--C-Black);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.modal-edit .input-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.modal-edit .form-control {
+    width: 100%;
+    height: 46px;
+    padding: 0 16px;
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif !important;
+    color: var(--C-Black);
+    background: var(--C-White-LM);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-edit .form-control.with-icon {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.modal-edit .form-control:focus {
+    border-color: var(--C-Green);
+    box-shadow: 0 0 0 4px var(--C-Green-Contrast-DM);
+}
+
+.modal-edit .form-control::placeholder {
+    color: var(--C-Black-Second);
+    font-weight: 400;
+}
+
+/* Mengatasi warna background browser saat fitur Autofill aktif */
+.modal-edit .form-control:-webkit-autofill,
+.modal-edit .form-control:-webkit-autofill:hover,
+.modal-edit .form-control:-webkit-autofill:focus,
+.modal-edit .form-control:not(:placeholder-shown) {
+    -webkit-box-shadow: 0 0 0px 1000px var(--C-White-LM) inset !important;
+    -webkit-text-fill-color: var(--C-Black) !important;
+    background-color: var(--C-White-LM) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+/* ==========================================================================
+   5. KONTROL KHUSUS (PANAH ANGKA, MATA PIN, HINT)
+   ========================================================================== */
+
+/* Menghilangkan Spin Button (Panah) pada input type number */
+.modal-edit input::-webkit-outer-spin-button,
+.modal-edit input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+.modal-edit input[type=number] {
+    -moz-appearance: textfield !important;
+}
+
+.modal-edit .toggle-eye {
+    position: absolute;
+    right: 16px;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer;
+    color: var(--C-Black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transition: color 0.2s ease;
+}
+
+.modal-edit .toggle-eye svg {
+    width: 22px;
+    height: 22px;
+}
+
+.modal-edit .form-hint {
+    font-size: 15px;
+    color: var(--C-Black-Second);
+    margin-top: 4px;
+    line-height: 20px;
+}
+
+
+/* ==========================================================================
+   6. TOMBOL SUBMIT
+   ========================================================================== */
+
+.modal-edit .btn-submit {
+    width: 100%;
+    padding: 18px;
+    margin-top: 28px;
+    background: var(--C-Green);
+    color: var(--C-White-LM);
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.modal-edit .btn-submit:hover {
+    background: var(--C-Green-Hover);
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   7. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .modal.modal-edit {
+        padding: 28px 24px;
+        margin: 20px;
+        border-radius: 20px;
+        width: calc(100% - 40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .user-edit-overlay {
+        padding: 12px;
+        align-items: center !important;
+    }
+
+    .modal.modal-edit {
+        padding: 24px 20px;
+        margin: 12px;
+        width: calc(100% - 24px);
+        max-width: 100%;
+        border-radius: 20px;
+        animation: modalFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-edit .modal-header {
+        margin-bottom: 20px;
+    }
+
+    .modal-edit .modal-title {
+        font-size: 17px;
+    }
+
+    .modal-edit .modal-close {
+        width: 34px;
+        height: 34px;
+    }
+
+    .modal-edit .form-inputs-wrapper {
+        gap: 20px;
+    }
+
+    .modal-edit .form-group {
+        gap: 8px;
+    }
+
+    .modal-edit .form-group label {
+        font-size: 14px;
+    }
+
+    .modal-edit .form-control {
+        height: 50px;
+        font-size: 16px; /* Mencegah auto-zoom di iOS */
+        border-radius: 10px;
+    }
+
+    .modal-edit .btn-submit {
+        margin-top: 24px;
+        padding: 16px;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+}
+
+@keyframes modalFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* ==========================================================================
+   8. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .modal.modal-edit {
+    background: var(--C-Black-Seccond-1-DM);
+    border: 1px solid var(--C-Stroke-DM);
+}
+
+body.dark-mode .modal-edit .modal-title {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .modal-edit .modal-close {
+    background: var(--C-Black-Seccond-2-DM);
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .modal-edit .modal-close:hover {
+    background: var(--C-Stroke-DM);
+}
+
+body.dark-mode .modal-edit .form-group label {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .modal-edit .form-control {
+    background: var(--C-Black-Seccond-2-DM);
+    border-color: var(--C-Stroke-DM);
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .modal-edit .form-control::placeholder {
+    color: var(--C-Seccond-Text-DM);
+}
+
+/* Perbaikan warna untuk input yang sudah terisi data agar tetap gelap di Dark Mode */
+body.dark-mode .modal-edit input#editNamaUser.form-control:not(:placeholder-shown),
+body.dark-mode .modal-edit input#editUsernameUser.form-control:not(:placeholder-shown),
+body.dark-mode .modal-edit .form-control:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--C-Black-Seccond-2-DM) inset !important;
+    -webkit-text-fill-color: var(--C-White-LM) !important;
+    background-color: var(--C-Black-Seccond-2-DM) !important;
+}
+
+body.dark-mode .modal-edit .input-icon {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .modal-edit .form-hint {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .modal-edit .toggle-eye {
+    color: var(--C-Seccond-Text-DM);
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}

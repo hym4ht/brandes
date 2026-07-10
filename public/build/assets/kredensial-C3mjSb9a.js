@@ -1,0 +1,1 @@
+function n(o,a="Data berhasil disalin"){o&&navigator.clipboard.writeText(o).then(()=>{window.showToast?window.showToast(a,"success"):alert(a)}).catch(i=>{console.error("Gagal menyalin:",i)})}window.copyToClipboard=n;

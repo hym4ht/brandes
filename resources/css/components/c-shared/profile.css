@@ -1,0 +1,221 @@
+/**
+ * ==========================================================================
+ * profile.css
+ * Deskripsi: Mengelola styling untuk komponen Dropdown Profil (Shared).
+ *            Mencakup desain panel user info, avatar besar, badge status,
+ *            serta kontrol switch tema (Light/Dark Mode).
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. KONTAINER DROPDOWN (USER DROPDOWN)
+   ========================================================================== */
+
+.user-dropdown {
+    position: absolute;
+    top: calc(89% + 15px);
+    right: 0;
+    width: 324px;
+    background: var(--C-White-LM);
+    border: 1px solid var(--C-Stroke);
+    border-radius: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    padding: 16px;
+}
+
+.user-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+
+/* ==========================================================================
+   2. HEADER DROPDOWN (USER INFO & AVATAR)
+   ========================================================================== */
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.user-avatar.big {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    background: var(--C-Green);
+}
+
+.user-info-detail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+/* ==========================================================================
+   3. DETAIL USER (NAME, ROLE, BADGE)
+   ========================================================================== */
+
+.user-name-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-name-val {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--C-Black);
+}
+
+.status-badge {
+    background: var(--C-Green-Contrast);
+    color: var(--C-Green);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 16px;
+    border-radius: 99px;
+}
+
+.user-role-val {
+    font-size: 14px;
+    color: var(--C-Black-Second);
+}
+
+.dropdown-divider {
+    height: 1.5px;
+    background: var(--C-Stroke);
+    margin: 0 0 20px;
+}
+
+
+/* ==========================================================================
+   4. TEMA SWITCHER (DARK/LIGHT MODE TOGGLE)
+   ========================================================================== */
+
+.theme-switcher-wrapper {
+    background: var(--C-Black-Seccond-3-DM);
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.theme-switcher {
+    display: flex;
+    gap: 6px;
+}
+
+.theme-btn {
+    flex: 1;
+    height: 42px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--C-Black-Second);
+    transition: all 0.2s;
+}
+
+.theme-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.theme-btn.active {
+    background: var(--C-Green);
+    color: var(--C-White-LM);
+}
+
+
+/* ==========================================================================
+   5. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .user-dropdown {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .user-name-val {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .status-badge {
+    background: var(--C-Green-Contrast-DM);
+}
+
+body.dark-mode .dropdown-divider {
+    background: var(--C-Stroke-DM);
+}
+
+body.dark-mode .theme-switcher-wrapper {
+    background: var(--C-Stroke-DM);
+}
+
+body.dark-mode .theme-btn:not(.active) {
+    color: var(--C-Seccond-Text-DM);
+}
+
+
+/* ==========================================================================
+   6. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    .user-dropdown {
+        width: 300px;
+        max-width: calc(100vw - 32px); /* Mencegah overflow pada layar sangat kecil */
+        right: 0;
+        top: calc(100% + 10px);
+        padding: 14px;
+        border-radius: 12px;
+        box-shadow: var(--C-Shadow-Modal); /* Tambahkan shadow agar lebih kontras di mobile */
+    }
+
+    .dropdown-header {
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .user-avatar.big {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .user-info-detail {
+        gap: 2px;
+    }
+
+    .user-name-val {
+        font-size: 14px;
+    }
+
+    .user-role-val {
+        font-size: 13px;
+    }
+
+    .status-badge {
+        font-size: 11px;
+        padding: 3px 10px;
+    }
+
+    .dropdown-divider {
+        margin-bottom: 16px;
+    }
+
+    .theme-btn {
+        height: 40px;
+    }
+}

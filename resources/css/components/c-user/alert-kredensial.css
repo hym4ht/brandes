@@ -1,0 +1,148 @@
+/**
+ * ==========================================================================
+ * alert-kredensial.css
+ * Deskripsi: Mengelola styling untuk banner notifikasi perubahan kredensial
+ *            (Password/PIN). Mencakup desain kartu kompak, ikon status,
+ *            tombol tutup melayang, serta penyesuaian tema gelap.
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. DASAR ALERT (ALERT CONTAINER)
+   ========================================================================== */
+
+.alert-kredensial {
+    position: relative;
+    background: var(--C-Green-Contrast);
+    border: 1.5px solid var(--C-Green-Stroke);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    animation: slideInDown 0.4s ease-out;
+}
+
+.alert-kredensial-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+
+/* ==========================================================================
+   2. DETAIL KONTEN (ICON & MESSAGE)
+   ========================================================================== */
+
+.alert-icon-box {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.badge-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--C-Red);
+}
+
+.alert-message-box {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--C-Black);
+    font-weight: 500;
+    max-width: 95%;
+}
+
+
+/* ==========================================================================
+   3. TOMBOL TUTUP (DISMISS BUTTON)
+   ========================================================================== */
+
+.alert-dismiss-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 38px;
+    height: 38px;
+    background: var(--C-White-Second);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease !important;
+    z-index: 10;
+}
+
+.alert-dismiss-btn:hover {
+    background: var(--C-Stroke);
+}
+
+.alert-dismiss-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--C-Black);
+    stroke-width: 2.5;
+}
+
+
+/* ==========================================================================
+   4. ANIMASI (SLIDE IN)
+   ========================================================================== */
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================================================
+   5. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .alert-kredensial {
+    background: var(--C-Green-Contrast-DM);
+    border-color: var(--C-Green-Stroke);
+}
+
+body.dark-mode .alert-message-box {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .badge-icon {
+    color: var(--C-Red-Soft);
+}
+
+body.dark-mode .alert-dismiss-btn {
+    background: var(--C-Black-Seccond-2-DM);
+    border: 1.5px solid var(--C-Stroke-DM);
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .alert-dismiss-btn:hover {
+    background: var(--C-Stroke-DM);
+}
+
+body.dark-mode .alert-dismiss-btn svg {
+    color: var(--C-White-LM);
+}
+
+
+/* ==========================================================================
+   6. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .alert-kredensial { padding: 12px; }
+    .alert-kredensial-content { gap: 10px; }
+    .alert-message-box { font-size: 13.5px; }
+}

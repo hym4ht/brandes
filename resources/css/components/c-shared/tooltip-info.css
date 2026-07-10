@@ -1,0 +1,139 @@
+/**
+ * ==========================================================================
+ * tooltip-info.css
+ * Deskripsi: Mengelola styling untuk komponen panduan / tooltip interaktif.
+ *            Berisi styling box, circle number, garis penghubung, serta 
+ *            responsivitas layout.
+ * ==========================================================================
+ */
+
+.tooltip-target-wrapper {
+    position: relative;
+    /* Memberikan ruang agar elemen di dalamnya bisa menjadi referensi absolut tooltip */
+    display: inline-block;
+}
+
+.custom-tooltip-info {
+    position: absolute;
+    /* Sembunyikan secara default, hanya ditampilkan oleh tour-guide.js */
+    display: none;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    pointer-events: none;
+    /* Agar tidak menghalangi klik pada elemen di bawahnya */
+    width: max-content;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: tooltipFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* ==========================================================================
+   POSISI DESKTOP
+   ========================================================================== */
+
+/* Tooltip berada di sebelah KIRI target, menunjuk ke KANAN */
+.custom-tooltip-info.pos-left {
+    right: 100%;
+    margin-right: 0px;
+}
+
+/* Tooltip berada di sebelah KANAN target, menunjuk ke KIRI */
+.custom-tooltip-info.pos-right {
+    left: 100%;
+    margin-left: 0px;
+}
+
+/* ==========================================================================
+   DESAIN ELEMEN TOOLTIP
+   ========================================================================== */
+
+.tooltip-box {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 250px;
+    border: 1px solid var(--C-Stroke, #e5e7eb);
+}
+
+.tooltip-box strong {
+    display: block;
+    font-size: 19px;
+    color: var(--C-Black, #111827);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.tooltip-box p {
+    font-size: 15px;
+    color: var(--C-Black-Second, #4B5563);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.tooltip-node {
+    display: flex;
+    align-items: center;
+}
+
+.tooltip-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--C-Green, #00A63E);
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 50%;
+    font-size: 18px;
+    border: 3.4px solid #ffffff;
+    z-index: 2;
+    /* Pastikan benar-benar di tengah */
+    line-height: 0;
+    box-sizing: content-box;
+    /* Jika teks terasa kurang ke bawah, tambahkan padding-top. 
+       Jika kurang ke atas, tambahkan padding-bottom. (Contoh: padding-top: 2px;) */
+    padding: 0;
+    margin: 0;
+}
+
+.tooltip-line {
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Horizontal Line (Kiri & Kanan) */
+.pos-left .tooltip-line,
+.pos-right .tooltip-line {
+    height: 3px;
+    width: 40px;
+}
+
+/* ==========================================================================
+   MOBILE FALLBACK (Nonaktifkan Tour Guide di Mobile)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .tour-backdrop,
+    .tour-overlay-hole,
+    .custom-tooltip-info {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
+    }
+}
+

@@ -1,0 +1,207 @@
+/**
+ * ==========================================================================
+ * delete.css
+ * Deskripsi: Mengelola styling untuk Modal Konfirmasi Hapus (Shared).
+ *            Komponen ini digunakan di berbagai modul (Admin & User)
+ *            untuk memastikan konsistensi visual saat proses penghapusan data.
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. OVERLAY (LATAR BELAKANG)
+   ========================================================================== */
+
+.user-delete-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--C-Overlay);
+    z-index: 99999999;
+    /* Prioritas sangat tinggi untuk konfirmasi kritis */
+    align-items: center;
+    justify-content: center;
+}
+
+.user-delete-overlay.show {
+    display: flex;
+}
+
+
+/* ==========================================================================
+   2. KONTAINER MODAL (MODAL CONTAINER)
+   ========================================================================== */
+
+.modal.modal-user-delete {
+    background: var(--C-White-LM);
+    border-radius: 12px;
+    border: 1.5px solid var(--C-Stroke);
+    padding: 22px;
+    width: 444px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    animation: fadeUp 0.25s ease;
+}
+
+
+/* ==========================================================================
+   3. BAGIAN HEADER (ICON & JUDUL)
+   ========================================================================== */
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.modal-icon-wrap {
+    width: 48px;
+    height: 48px;
+    background: var(--C-Red-Contrast);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.modal-icon-wrap svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--C-Red);
+    transition: all 0.3s ease;
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--C-Black);
+}
+
+
+/* ==========================================================================
+   4. TIPOGRAFI (DESKRIPSI)
+   ========================================================================== */
+
+.modal-desc {
+    font-size: 15px !important;
+    color: var(--C-Black-Second);
+    line-height: 24px;
+}
+
+.modal-desc strong {
+    color: var(--C-Black);
+    font-weight: 700;
+}
+
+
+/* ==========================================================================
+   5. TOMBOL AKSI (ACTION BUTTONS)
+   ========================================================================== */
+
+.modal-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+/* Memaksa kedua tombol agar selalu identik ukurannya */
+.modal-actions .btn-batal,
+.modal-actions .btn-confirm {
+    width: 100% !important;
+    min-width: unset !important;
+    height: 49px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Tombol Batal/Cancel */
+.modal-actions .btn-batal {
+    background: var(--C-White-Second);
+    color: var(--C-Black);
+}
+
+.modal-actions .btn-batal:hover {
+    background: var(--C-Stroke);
+    transform: translateY(-2px);
+}
+
+/* Tombol Konfirmasi Hapus */
+.modal-actions .btn-confirm {
+    background: var(--C-Red);
+    color: var(--C-White-LM);
+}
+
+.modal-actions .btn-confirm:hover {
+    background: var(--C-Red-Hover);
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   6. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .modal.modal-user-delete {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .modal-icon-wrap {
+    background: var(--C-Red-Contrast-DM);
+}
+
+body.dark-mode .modal-title,
+body.dark-mode .modal-desc strong {
+    color: var(--C-White-LM);
+}
+
+body.dark-mode .modal-desc {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .btn-batal {
+    background: var(--C-Black-Seccond-3-DM);
+    color: var(--C-White-DM);
+}
+
+body.dark-mode .btn-batal:hover {
+    background: var(--C-Black-Seccond-4-DM);
+}
+
+
+/* ==========================================================================
+   7. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .modal.modal-user-delete {
+        margin: 16px;
+        width: auto;
+        padding: 20px;
+    }
+
+    .modal-actions {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-actions {
+        grid-template-columns: 1fr;
+    }
+}

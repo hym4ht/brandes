@@ -1,0 +1,294 @@
+/**
+ * ==========================================================================
+ * log-berkas.css (User)
+ * Deskripsi: Mengelola seluruh styling untuk halaman Log Berkas User
+ * ==========================================================================
+ */
+
+/* ==========================================================================
+   1. RINGKASAN STATISTIK (STAT CARDS)
+   ========================================================================== */
+
+.stat-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 22px !important;
+}
+
+.stat-card {
+    background: var(--C-White-LM);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeUp 0.4s ease both;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stat-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--C-Black);
+}
+
+.stat-value {
+    font-size: 38px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: var(--C-Black);
+    line-height: 1;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--C-Green-Contrast);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--C-Green);
+}
+
+/* ==========================================================================
+   2. TOOLBAR (SEARCH)
+   ========================================================================== */
+
+.div-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 8px;
+    padding: 0 16px;
+    transition: all 0.2s;
+    background: var(--C-White-LM);
+    width: 584px;
+    height: 48px;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.search-box:focus-within {
+    border-color: var(--C-Green);
+    box-shadow: 0 0 0 4px var(--C-Green-Contrast-DM);
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--C-Black-Second);
+    width: 100%;
+    background: transparent;
+}
+
+.search-box svg {
+    width: 20px !important;
+    height: 20px !important;
+    stroke: var(--C-Black);
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   3. TABEL DATA
+   ========================================================================== */
+
+.table-card {
+    background: var(--C-White-LM);
+    border: 1.5px solid var(--C-Stroke);
+    border-radius: 12px;
+    animation: fadeUp 0.4s ease 0.1s both;
+    position: relative;
+    overflow: hidden;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+thead {
+    background: var(--C-White-Second);
+}
+
+th {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--C-Black-Second);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1.5px solid var(--C-Stroke);
+    padding: 18px 20px;
+}
+
+td {
+    text-align: left;
+    color: var(--C-Black);
+    border-bottom: 1.5px solid var(--C-Stroke);
+    padding: 20px 22px;
+    vertical-align: middle;
+}
+
+.td-judul strong {
+    font-size: 16px;
+}
+
+tr:last-child td,
+tr.last-row td,
+#emptyState td,
+#searchNotFoundState td {
+    border-bottom: none !important;
+}
+
+/* Pengaturan Lebar Kolom (Fleksibel) */
+th:nth-child(1) { width: 68px; padding-left: 24px; } /* NO */
+th:nth-child(2) { width: 340px; } /* NAMA */
+th:nth-child(3) { width: 160px; } /* TANGGAL */
+th:nth-child(4) { width: 140px; } /* KTP */
+th:nth-child(5) { width: 140px; } /* KK */
+th:nth-child(6) { width: 140px; } /* AKTE */
+th:last-child { width: 100px; padding-right: 24px; } /* AKSI */
+
+.badge-status {
+    display: inline-flex;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.badge-status.aktif {
+    background: var(--C-Green-Contrast);
+    color: var(--C-Green);
+}
+
+.badge-status.nonaktif {
+    background: var(--C-Red-Contrast);
+    color: var(--C-Red);
+}
+
+.btn-action {
+    transition: all 0.2s ease;
+}
+
+.btn-action:hover:not([disabled]) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   4. MEDIA QUERIES (RESPONSIVE)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .stat-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .div-toolbar {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+
+    .search-box {
+        flex: 1 !important;
+        width: auto !important;
+        min-width: 0;
+    }
+}
+
+/* ==========================================================================
+   5. DARK MODE OVERRIDES
+   ========================================================================== */
+
+body.dark-mode .stat-card,
+body.dark-mode .table-card {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .stat-label,
+body.dark-mode .stat-value,
+body.dark-mode td {
+    color: var(--C-White-LM) !important;
+}
+
+body.dark-mode th {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .stat-icon {
+    background: var(--C-Green-Contrast-DM);
+}
+
+body.dark-mode thead {
+    background: var(--C-Black-Seccond-3-DM);
+}
+
+body.dark-mode td,
+body.dark-mode th {
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .search-box {
+    background: var(--C-Black-Seccond-1-DM);
+    border-color: var(--C-Stroke-DM);
+}
+
+body.dark-mode .search-box input,
+body.dark-mode .search-box input::placeholder {
+    color: var(--C-Seccond-Text-DM);
+}
+
+body.dark-mode .badge-status.aktif {
+    background: var(--C-Green-Contrast-DM);
+    color: var(--C-Green);
+}
+
+body.dark-mode .badge-status.nonaktif {
+    background: var(--C-Red-Contrast-DM);
+    color: var(--C-Red-Soft);
+}
+
+body.dark-mode .btn-action[disabled] {
+    background: var(--C-Black-Seccond-1-DM) !important;
+    border-color: var(--C-Stroke-DM) !important;
+    color: var(--C-Seccond-Text-DM) !important;
+}

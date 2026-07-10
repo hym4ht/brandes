@@ -1,0 +1,76 @@
+/**
+ * ==========================================================================
+ * colors.css
+ * Deskripsi: Pusat variabel warna global untuk seluruh aplikasi (Brand Colors).
+ *            Diorganisir berdasarkan mode (Light, Dark, & Shared) untuk 
+ *            memudahkan pengelolaan tema dan konsistensi visual.
+ * ==========================================================================
+ */
+
+:root {
+    /* ==========================================================================
+       WARNA GLOBAL
+       ========================================================================== */
+
+    /* --- Brand & Semantic Colors --- */
+    --C-Green: #00A63E;
+    --C-Green-Hover: #008f35;
+    --C-Red: #E7000B;
+    --C-Red-Hover: #D30001;
+    --C-Red-Contrast-Notif: #FFDEDE;
+    --C-Green-Contrast-Notif: rgba(0, 166, 62, 0.15);
+    --C-Red-Soft: #EF4444;
+    --C-Yellow: #D97706;
+    --C-Yellow-Soft: #F59E0B;
+
+    /* --- Overlay --- */
+    --C-Overlay: rgba(0, 0, 0, 0.35);
+    --C-Overlay-Dark: rgba(0, 0, 0, 0.45);
+
+
+    /* ==========================================================================
+       LIGHT MODE (LM)
+       ========================================================================== */
+
+    /* --- Background & UI --- */
+    --C-White-LM: #FFFFFF;
+    --C-White-Second: #F5F5F5;
+    --C-White-1-Second: #FBFBFB;
+    --C-Black: #101828;
+    --C-Black-Second: #6A7282;
+    --C-Stroke: #E5E7EB;
+    --C-Border-Light: #F1F1F1;
+
+    /* --- Contrast LM --- */
+    --C-Green-Contrast: #EFFFF5;
+    --C-Green-Stroke: rgba(0, 166, 62, 0.40);
+    --C-Red-Contrast: #FEF2F2;
+    --C-Red-Stroke: #FFC9C9;
+    --C-Yellow-Contrast: #FFFBEB;
+    --C-Yellow-Stroke: #FEF3C7;
+
+
+    /* ==========================================================================
+       DARK MODE (DM)
+       ========================================================================== */
+
+    /* --- Background & UI DM --- */
+    --C-Main-BG-DM: #030712;
+    --C-Main-Page-DM: #030712;
+    --C-Black-Seccond-1-DM: #101828;
+    --C-Black-Seccond-2-DM: #0B0F19;
+    --C-Black-Seccond-3-DM: rgba(132, 132, 132, 0.10);
+    --C-Black-Seccond-4-DM: rgba(30, 41, 57, 0.40);
+    --C-Stroke-DM: #1E2939;
+    --C-Stroke-DM-2: #1F2937;
+    --C-Seccond-Text-DM: #99A1AF;
+    --C-White-DM: #F9FAFB;
+
+    /* --- Contrast DM --- */
+    --C-Green-Contrast-DM: rgba(0, 166, 62, 0.30);
+    --C-Green-Stroke-DM: rgba(0, 166, 62, 0.50);
+    --C-Red-Contrast-DM: rgba(231, 0, 11, 0.10);
+    --C-Red-Stroke-DM: rgba(239, 68, 68, 0.40);
+    --C-Yellow-Contrast-DM: rgba(245, 158, 11, 0.15);
+    --C-Yellow-Stroke-DM: rgba(245, 158, 11, 0.30);
+}
